@@ -1,10 +1,14 @@
+import scala.io.StdIn.readInt;
+
 object q3 extends App {
-    def cost(x: Int) : Double = {
-        var totalCoverPrice: Double = x*24.95;
-        var discount : Double = (totalCoverPrice*40.0)/100.0;
-        var shipCost : Double = if(x>50){50.0*3.0 + 0.75*(x - 50)} else x * 3.0;
-        return totalCoverPrice - discount + shipCost;
+    var b:Int = 0;
+    def sum(a:Int): Unit={
+        b = b + a; 
+        if(a>0) sum(a - 1);
+        else print(b); 
     }
 
-    print(cost(60));
+    print("Input a value:");
+    var value = readInt();
+    sum(value);
 }

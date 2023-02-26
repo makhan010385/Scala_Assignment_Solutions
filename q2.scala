@@ -1,24 +1,24 @@
 import scala.io.StdIn.readInt;
 
 object q2 extends App {
-    def profit(ticketPrice: Int, attendence: Int) : Int = ticketPrice*attendence;
-
-
-    def attendenceChange(ticketPrice: Int) : Int = {
-        if(ticketPrice > 15)
-            return ((ticketPrice - 15) / 5) * (-20);
-        else if(15 > ticketPrice) 
-            return ((15 - ticketPrice) / 5) * 20;
-        else
-            return 0;
+    def gcd(a:Int, b:Int):Int=b match{
+        case 0 => a;
+        case x if x>a => gcd(x,a);
+        case x => gcd(x,a%x);
+    }
+    def prime(a:Int, b:Int = 2): Boolean = b match{
+        case x if(x==a)=>true;
+        case x if gcd(a,x)>1 => false;
+        case x => prime(a,x+1);
+    }
+    def primeSeq(n:Int) : Unit={
+        if(n>1){
+            primeSeq(n-1);
+            if (prime(n)) println(n);
+        }
     }
 
-    def netProfit(ticketPrice: Int, attendence: Int) : Int = {
-        return profit(ticketPrice, attendence + attendenceChange(ticketPrice)) - (500 + 3*(attendence + attendenceChange(ticketPrice)));
-    }
-
-    print("Input ticket price:");
-    var ticketPrice = readInt();
-    print("Profit : " + netProfit(ticketPrice, 120));
-
+    print("Input a value:");
+    var value = readInt();
+    primeSeq(value);
 }
